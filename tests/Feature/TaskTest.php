@@ -18,6 +18,9 @@ class TaskTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->withoutVite();
+
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
     }

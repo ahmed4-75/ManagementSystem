@@ -14,10 +14,13 @@ class ProjectTest extends TestCase
 {
     use RefreshDatabase;
     protected User $user;
- 
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->withoutVite();
+
         $this->user = User::factory()->create();
         $this->actingAs($this->user);
     }
