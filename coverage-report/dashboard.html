@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for F:\XAMPP\htdocs\ManagementSystem\app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=11.0.12" rel="stylesheet" type="text/css">
+  <link href="_css/nv.d3.min.css?v=11.0.12" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=11.0.12" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">F:\XAMPP\htdocs\ManagementSystem\app</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Resources/RoleResource.php.html#8">App\Http\Resources\RoleResource</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Role.php.html#9">App\Models\Role</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Enums/RolesEnum.php.html#5">App\Enums\RolesEnum</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/ResetPasswordMail.php.html#11">App\Mail\ResetPasswordMail</a></td><td class="text-right">12%</td></tr>
+       <tr><td><a href="Mail/VerifyEmailMail.php.html#11">App\Mail\VerifyEmailMail</a></td><td class="text-right">22%</td></tr>
+       <tr><td><a href="Models/Status.php.html#10">App\Models\Status</a></td><td class="text-right">33%</td></tr>
+       <tr><td><a href="Notifications/NewProject.php.html#9">App\Notifications\NewProject</a></td><td class="text-right">60%</td></tr>
+       <tr><td><a href="Models/Project.php.html#10">App\Models\Project</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Models/Task.php.html#9">App\Models\Task</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Repositories/TaskRepository.php.html#15">App\Repositories\TaskRepository</a></td><td class="text-right">73%</td></tr>
+       <tr><td><a href="Models/User.php.html#13">App\Models\User</a></td><td class="text-right">80%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Repositories/TaskRepository.php.html#15">App\Repositories\TaskRepository</a></td><td class="text-right">11</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Http/Resources/RoleResource.php.html#15"><abbr title="App\Http\Resources\RoleResource::toArray">toArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/ResetPasswordMail.php.html#27"><abbr title="App\Mail\ResetPasswordMail::envelope">envelope</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/ResetPasswordMail.php.html#37"><abbr title="App\Mail\ResetPasswordMail::content">content</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/ResetPasswordMail.php.html#49"><abbr title="App\Mail\ResetPasswordMail::attachments">attachments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/VerifyEmailMail.php.html#30"><abbr title="App\Mail\VerifyEmailMail::envelope">envelope</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/VerifyEmailMail.php.html#40"><abbr title="App\Mail\VerifyEmailMail::content">content</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mail/VerifyEmailMail.php.html#52"><abbr title="App\Mail\VerifyEmailMail::attachments">attachments</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Project.php.html#31"><abbr title="App\Models\Project::statuses">statuses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Role.php.html#23"><abbr title="App\Models\Role::users">users</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Status.php.html#28"><abbr title="App\Models\Status::user">user</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Status.php.html#36"><abbr title="App\Models\Status::project">project</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/Task.php.html#45"><abbr title="App\Models\Task::status">status</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#77"><abbr title="App\Models\User::statuses">statuses</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Models/User.php.html#85"><abbr title="App\Models\User::tasks">tasks</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notifications/NewProject.php.html#32"><abbr title="App\Notifications\NewProject::toMail">toMail</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Enums/RolesEnum.php.html#13"><abbr title="App\Enums\RolesEnum::values">values</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repositories/TaskRepository.php.html#54"><abbr title="App\Repositories\TaskRepository::ChangeStatus">ChangeStatus</abbr></a></td><td class="text-right">35%</td></tr>
+       <tr><td><a href="Services/ProjectService.php.html#18"><abbr title="App\Services\ProjectService::authorized">authorized</abbr></a></td><td class="text-right">83%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/VerifyEmailController.php.html#102"><abbr title="App\Http\Controllers\Auth\VerifyEmailController::verify">verify</abbr></a></td><td class="text-right">86%</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/VerifyPhoneController.php.html#115"><abbr title="App\Http\Controllers\Auth\VerifyPhoneController::verify">verify</abbr></a></td><td class="text-right">86%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Repositories/TaskRepository.php.html#54"><abbr title="App\Repositories\TaskRepository::ChangeStatus">ChangeStatus</abbr></a></td><td class="text-right">8</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/VerifyEmailController.php.html#102"><abbr title="App\Http\Controllers\Auth\VerifyEmailController::verify">verify</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Http/Controllers/Auth/VerifyPhoneController.php.html#115"><abbr title="App\Http\Controllers\Auth\VerifyPhoneController::verify">verify</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Services/ProjectService.php.html#18"><abbr title="App\Services\ProjectService::authorized">authorized</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 11.0.12</a> using <a href="https://www.php.net/" target="_top">PHP 8.2.4</a> and <a href="https://phpunit.de/">PHPUnit 11.5.55</a> at Sat Jul 11 13:18:06 UTC 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/jquery.min.js?v=11.0.12" type="text/javascript"></script>
+  <script src="_js/d3.min.js?v=11.0.12" type="text/javascript"></script>
+  <script src="_js/nv.d3.min.js?v=11.0.12" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([3,0,1,1,1,0,0,3,1,1,4,34], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([16,0,0,0,1,0,0,0,0,3,2,132], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,3,"<a href=\"Events\/EndTask.php.html#13\">App\\Events\\EndTask<\/a>"],[100,6,"<a href=\"Http\/Controllers\/Auth\/LoginController.php.html#13\">App\\Http\\Controllers\\Auth\\LoginController<\/a>"],[100,3,"<a href=\"Http\/Controllers\/Auth\/LoginNoPasswordController.php.html#16\">App\\Http\\Controllers\\Auth\\LoginNoPasswordController<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Auth\/RegisterController.php.html#12\">App\\Http\\Controllers\\Auth\\RegisterController<\/a>"],[92.5925925925926,9,"<a href=\"Http\/Controllers\/Auth\/VerifyEmailController.php.html#14\">App\\Http\\Controllers\\Auth\\VerifyEmailController<\/a>"],[93.84615384615384,9,"<a href=\"Http\/Controllers\/Auth\/VerifyPhoneController.php.html#13\">App\\Http\\Controllers\\Auth\\VerifyPhoneController<\/a>"],[100,0,"<a href=\"Http\/Controllers\/Controller.php.html#5\">App\\Http\\Controllers\\Controller<\/a>"],[100,8,"<a href=\"Http\/Controllers\/ProfileController.php.html#15\">App\\Http\\Controllers\\ProfileController<\/a>"],[100,7,"<a href=\"Http\/Controllers\/ProjectsController.php.html#9\">App\\Http\\Controllers\\ProjectsController<\/a>"],[100,5,"<a href=\"Http\/Controllers\/StatusesController.php.html#9\">App\\Http\\Controllers\\StatusesController<\/a>"],[100,6,"<a href=\"Http\/Controllers\/TasksController.php.html#9\">App\\Http\\Controllers\\TasksController<\/a>"],[100,7,"<a href=\"Http\/Controllers\/UsersController.php.html#9\">App\\Http\\Controllers\\UsersController<\/a>"],[100,2,"<a href=\"Http\/Requests\/Auth\/ForgotPasswordRequest.php.html#7\">App\\Http\\Requests\\Auth\\ForgotPasswordRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/Auth\/LoginRequest.php.html#7\">App\\Http\\Requests\\Auth\\LoginRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Auth\/RegisterRequest.php.html#7\">App\\Http\\Requests\\Auth\\RegisterRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/Auth\/ResetPasswordRequest.php.html#7\">App\\Http\\Requests\\Auth\\ResetPasswordRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/Auth\/VerifyEmailRequest.php.html#7\">App\\Http\\Requests\\Auth\\VerifyEmailRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/Auth\/VerifyPhoneRequest.php.html#7\">App\\Http\\Requests\\Auth\\VerifyPhoneRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/ProjectRequest.php.html#7\">App\\Http\\Requests\\ProjectRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/RolesRequest.php.html#9\">App\\Http\\Requests\\RolesRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/StatusRequest.php.html#7\">App\\Http\\Requests\\StatusRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/TaskRequest.php.html#7\">App\\Http\\Requests\\TaskRequest<\/a>"],[100,2,"<a href=\"Http\/Requests\/UpdatePasswordRequest.php.html#7\">App\\Http\\Requests\\UpdatePasswordRequest<\/a>"],[100,3,"<a href=\"Http\/Requests\/UpdateProfileRequest.php.html#8\">App\\Http\\Requests\\UpdateProfileRequest<\/a>"],[100,1,"<a href=\"Http\/Resources\/NotificationResource.php.html#8\">App\\Http\\Resources\\NotificationResource<\/a>"],[100,1,"<a href=\"Http\/Resources\/ProjectResource.php.html#8\">App\\Http\\Resources\\ProjectResource<\/a>"],[0,1,"<a href=\"Http\/Resources\/RoleResource.php.html#8\">App\\Http\\Resources\\RoleResource<\/a>"],[100,1,"<a href=\"Http\/Resources\/StatusResource.php.html#8\">App\\Http\\Resources\\StatusResource<\/a>"],[100,1,"<a href=\"Http\/Resources\/TaskResource.php.html#8\">App\\Http\\Resources\\TaskResource<\/a>"],[100,1,"<a href=\"Http\/Resources\/UserResource.php.html#8\">App\\Http\\Resources\\UserResource<\/a>"],[12.5,4,"<a href=\"Mail\/ResetPasswordMail.php.html#11\">App\\Mail\\ResetPasswordMail<\/a>"],[22.22222222222222,4,"<a href=\"Mail\/VerifyEmailMail.php.html#11\">App\\Mail\\VerifyEmailMail<\/a>"],[66.66666666666666,3,"<a href=\"Models\/Project.php.html#10\">App\\Models\\Project<\/a>"],[0,1,"<a href=\"Models\/Role.php.html#9\">App\\Models\\Role<\/a>"],[33.33333333333333,3,"<a href=\"Models\/Status.php.html#10\">App\\Models\\Status<\/a>"],[66.66666666666666,3,"<a href=\"Models\/Task.php.html#9\">App\\Models\\Task<\/a>"],[80,6,"<a href=\"Models\/User.php.html#13\">App\\Models\\User<\/a>"],[60,4,"<a href=\"Notifications\/NewProject.php.html#9\">App\\Notifications\\NewProject<\/a>"],[100,2,"<a href=\"Providers\/AppServiceProvider.php.html#15\">App\\Providers\\AppServiceProvider<\/a>"],[97.10144927536231,12,"<a href=\"Repositories\/ProjectRepository.php.html#15\">App\\Repositories\\ProjectRepository<\/a>"],[100,4,"<a href=\"Repositories\/StatusRepository.php.html#10\">App\\Repositories\\StatusRepository<\/a>"],[73.68421052631578,10,"<a href=\"Repositories\/TaskRepository.php.html#15\">App\\Repositories\\TaskRepository<\/a>"],[100,9,"<a href=\"Repositories\/UserRepository.php.html#12\">App\\Repositories\\UserRepository<\/a>"],[96,10,"<a href=\"Services\/ProjectService.php.html#12\">App\\Services\\ProjectService<\/a>"],[100,6,"<a href=\"Services\/StatusService.php.html#10\">App\\Services\\StatusService<\/a>"],[100,6,"<a href=\"Services\/TaskService.php.html#8\">App\\Services\\TaskService<\/a>"],[100,11,"<a href=\"Services\/UserService.php.html#13\">App\\Services\\UserService<\/a>"],[100,0,"<a href=\"Swagger\/OpenApi.php.html#7\">App\\Swagger\\OpenApi<\/a>"],[0,1,"<a href=\"Enums\/RolesEnum.php.html#5\">App\\Enums\\RolesEnum<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"Events\/EndTask.php.html#20\">App\\Events\\EndTask::__construct<\/a>"],[100,1,"<a href=\"Events\/EndTask.php.html#31\">App\\Events\\EndTask::broadcastOn<\/a>"],[100,1,"<a href=\"Events\/EndTask.php.html#39\">App\\Events\\EndTask::broadcastAs<\/a>"],[100,6,"<a href=\"Http\/Controllers\/Auth\/LoginController.php.html#15\">App\\Http\\Controllers\\Auth\\LoginController::__invoke<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Auth\/LoginNoPasswordController.php.html#18\">App\\Http\\Controllers\\Auth\\LoginNoPasswordController::forgotPassword<\/a>"],[100,2,"<a href=\"Http\/Controllers\/Auth\/LoginNoPasswordController.php.html#100\">App\\Http\\Controllers\\Auth\\LoginNoPasswordController::resetPassword<\/a>"],[100,1,"<a href=\"Http\/Controllers\/Auth\/RegisterController.php.html#14\">App\\Http\\Controllers\\Auth\\RegisterController::__invoke<\/a>"],[100,5,"<a href=\"Http\/Controllers\/Auth\/VerifyEmailController.php.html#16\">App\\Http\\Controllers\\Auth\\VerifyEmailController::send<\/a>"],[86.20689655172413,4,"<a href=\"Http\/Controllers\/Auth\/VerifyEmailController.php.html#102\">App\\Http\\Controllers\\Auth\\VerifyEmailController::verify<\/a>"],[100,5,"<a href=\"Http\/Controllers\/Auth\/VerifyPhoneController.php.html#15\">App\\Http\\Controllers\\Auth\\VerifyPhoneController::send<\/a>"],[86.20689655172413,4,"<a href=\"Http\/Controllers\/Auth\/VerifyPhoneController.php.html#115\">App\\Http\\Controllers\\Auth\\VerifyPhoneController::verify<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProfileController.php.html#41\">App\\Http\\Controllers\\ProfileController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProfileController.php.html#57\">App\\Http\\Controllers\\ProfileController::DeleteNewProjectNotification<\/a>"],[100,2,"<a href=\"Http\/Controllers\/ProfileController.php.html#107\">App\\Http\\Controllers\\ProfileController::updatePassword<\/a>"],[100,3,"<a href=\"Http\/Controllers\/ProfileController.php.html#169\">App\\Http\\Controllers\\ProfileController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProfileController.php.html#218\">App\\Http\\Controllers\\ProfileController::logout<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#11\">App\\Http\\Controllers\\ProjectsController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#15\">App\\Http\\Controllers\\ProjectsController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#25\">App\\Http\\Controllers\\ProjectsController::ProjectsUser<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#35\">App\\Http\\Controllers\\ProjectsController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#46\">App\\Http\\Controllers\\ProjectsController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#56\">App\\Http\\Controllers\\ProjectsController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/ProjectsController.php.html#66\">App\\Http\\Controllers\\ProjectsController::delete<\/a>"],[100,1,"<a href=\"Http\/Controllers\/StatusesController.php.html#11\">App\\Http\\Controllers\\StatusesController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/StatusesController.php.html#15\">App\\Http\\Controllers\\StatusesController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/StatusesController.php.html#25\">App\\Http\\Controllers\\StatusesController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/StatusesController.php.html#35\">App\\Http\\Controllers\\StatusesController::update<\/a>"],[100,1,"<a href=\"Http\/Controllers\/StatusesController.php.html#45\">App\\Http\\Controllers\\StatusesController::delete<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#11\">App\\Http\\Controllers\\TasksController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#15\">App\\Http\\Controllers\\TasksController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#26\">App\\Http\\Controllers\\TasksController::show<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#37\">App\\Http\\Controllers\\TasksController::store<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#47\">App\\Http\\Controllers\\TasksController::ChangeStatus<\/a>"],[100,1,"<a href=\"Http\/Controllers\/TasksController.php.html#57\">App\\Http\\Controllers\\TasksController::delete<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#11\">App\\Http\\Controllers\\UsersController::__construct<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#16\">App\\Http\\Controllers\\UsersController::index<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#27\">App\\Http\\Controllers\\UsersController::UsersRole<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#38\">App\\Http\\Controllers\\UsersController::ChangeRole<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#48\">App\\Http\\Controllers\\UsersController::activate<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#58\">App\\Http\\Controllers\\UsersController::ban<\/a>"],[100,1,"<a href=\"Http\/Controllers\/UsersController.php.html#68\">App\\Http\\Controllers\\UsersController::delete<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/ForgotPasswordRequest.php.html#12\">App\\Http\\Requests\\Auth\\ForgotPasswordRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/ForgotPasswordRequest.php.html#22\">App\\Http\\Requests\\Auth\\ForgotPasswordRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/LoginRequest.php.html#12\">App\\Http\\Requests\\Auth\\LoginRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/LoginRequest.php.html#22\">App\\Http\\Requests\\Auth\\LoginRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/RegisterRequest.php.html#12\">App\\Http\\Requests\\Auth\\RegisterRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/RegisterRequest.php.html#22\">App\\Http\\Requests\\Auth\\RegisterRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/RegisterRequest.php.html#37\">App\\Http\\Requests\\Auth\\RegisterRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/ResetPasswordRequest.php.html#12\">App\\Http\\Requests\\Auth\\ResetPasswordRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/ResetPasswordRequest.php.html#22\">App\\Http\\Requests\\Auth\\ResetPasswordRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/VerifyEmailRequest.php.html#12\">App\\Http\\Requests\\Auth\\VerifyEmailRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/VerifyEmailRequest.php.html#22\">App\\Http\\Requests\\Auth\\VerifyEmailRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/VerifyPhoneRequest.php.html#12\">App\\Http\\Requests\\Auth\\VerifyPhoneRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/VerifyPhoneRequest.php.html#22\">App\\Http\\Requests\\Auth\\VerifyPhoneRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/Auth\/VerifyPhoneRequest.php.html#36\">App\\Http\\Requests\\Auth\\VerifyPhoneRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Requests\/ProjectRequest.php.html#12\">App\\Http\\Requests\\ProjectRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/ProjectRequest.php.html#22\">App\\Http\\Requests\\ProjectRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/RolesRequest.php.html#14\">App\\Http\\Requests\\RolesRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/RolesRequest.php.html#24\">App\\Http\\Requests\\RolesRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/StatusRequest.php.html#12\">App\\Http\\Requests\\StatusRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/StatusRequest.php.html#22\">App\\Http\\Requests\\StatusRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/TaskRequest.php.html#12\">App\\Http\\Requests\\TaskRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/TaskRequest.php.html#22\">App\\Http\\Requests\\TaskRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/UpdatePasswordRequest.php.html#12\">App\\Http\\Requests\\UpdatePasswordRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/UpdatePasswordRequest.php.html#22\">App\\Http\\Requests\\UpdatePasswordRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/UpdateProfileRequest.php.html#13\">App\\Http\\Requests\\UpdateProfileRequest::authorize<\/a>"],[100,1,"<a href=\"Http\/Requests\/UpdateProfileRequest.php.html#23\">App\\Http\\Requests\\UpdateProfileRequest::rules<\/a>"],[100,1,"<a href=\"Http\/Requests\/UpdateProfileRequest.php.html#39\">App\\Http\\Requests\\UpdateProfileRequest::messages<\/a>"],[100,1,"<a href=\"Http\/Resources\/NotificationResource.php.html#15\">App\\Http\\Resources\\NotificationResource::toArray<\/a>"],[100,1,"<a href=\"Http\/Resources\/ProjectResource.php.html#15\">App\\Http\\Resources\\ProjectResource::toArray<\/a>"],[0,1,"<a href=\"Http\/Resources\/RoleResource.php.html#15\">App\\Http\\Resources\\RoleResource::toArray<\/a>"],[100,1,"<a href=\"Http\/Resources\/StatusResource.php.html#15\">App\\Http\\Resources\\StatusResource::toArray<\/a>"],[100,1,"<a href=\"Http\/Resources\/TaskResource.php.html#15\">App\\Http\\Resources\\TaskResource::toArray<\/a>"],[100,1,"<a href=\"Http\/Resources\/UserResource.php.html#15\">App\\Http\\Resources\\UserResource::toArray<\/a>"],[100,1,"<a href=\"Mail\/ResetPasswordMail.php.html#19\">App\\Mail\\ResetPasswordMail::__construct<\/a>"],[0,1,"<a href=\"Mail\/ResetPasswordMail.php.html#27\">App\\Mail\\ResetPasswordMail::envelope<\/a>"],[0,1,"<a href=\"Mail\/ResetPasswordMail.php.html#37\">App\\Mail\\ResetPasswordMail::content<\/a>"],[0,1,"<a href=\"Mail\/ResetPasswordMail.php.html#49\">App\\Mail\\ResetPasswordMail::attachments<\/a>"],[100,1,"<a href=\"Mail\/VerifyEmailMail.php.html#21\">App\\Mail\\VerifyEmailMail::__construct<\/a>"],[0,1,"<a href=\"Mail\/VerifyEmailMail.php.html#30\">App\\Mail\\VerifyEmailMail::envelope<\/a>"],[0,1,"<a href=\"Mail\/VerifyEmailMail.php.html#40\">App\\Mail\\VerifyEmailMail::content<\/a>"],[0,1,"<a href=\"Mail\/VerifyEmailMail.php.html#52\">App\\Mail\\VerifyEmailMail::attachments<\/a>"],[100,1,"<a href=\"Models\/Project.php.html#23\">App\\Models\\Project::users<\/a>"],[0,1,"<a href=\"Models\/Project.php.html#31\">App\\Models\\Project::statuses<\/a>"],[100,1,"<a href=\"Models\/Project.php.html#39\">App\\Models\\Project::tasks<\/a>"],[0,1,"<a href=\"Models\/Role.php.html#23\">App\\Models\\Role::users<\/a>"],[0,1,"<a href=\"Models\/Status.php.html#28\">App\\Models\\Status::user<\/a>"],[0,1,"<a href=\"Models\/Status.php.html#36\">App\\Models\\Status::project<\/a>"],[100,1,"<a href=\"Models\/Status.php.html#44\">App\\Models\\Status::tasks<\/a>"],[100,1,"<a href=\"Models\/Task.php.html#29\">App\\Models\\Task::user<\/a>"],[100,1,"<a href=\"Models\/Task.php.html#37\">App\\Models\\Task::project<\/a>"],[0,1,"<a href=\"Models\/Task.php.html#45\">App\\Models\\Task::status<\/a>"],[100,1,"<a href=\"Models\/User.php.html#49\">App\\Models\\User::casts<\/a>"],[100,1,"<a href=\"Models\/User.php.html#61\">App\\Models\\User::roles<\/a>"],[100,1,"<a href=\"Models\/User.php.html#69\">App\\Models\\User::projects<\/a>"],[0,1,"<a href=\"Models\/User.php.html#77\">App\\Models\\User::statuses<\/a>"],[0,1,"<a href=\"Models\/User.php.html#85\">App\\Models\\User::tasks<\/a>"],[100,1,"<a href=\"Models\/User.php.html#90\">App\\Models\\User::getIsActiveAttribute<\/a>"],[100,1,"<a href=\"Notifications\/NewProject.php.html#16\">App\\Notifications\\NewProject::__construct<\/a>"],[100,1,"<a href=\"Notifications\/NewProject.php.html#24\">App\\Notifications\\NewProject::via<\/a>"],[0,1,"<a href=\"Notifications\/NewProject.php.html#32\">App\\Notifications\\NewProject::toMail<\/a>"],[100,1,"<a href=\"Notifications\/NewProject.php.html#45\">App\\Notifications\\NewProject::toArray<\/a>"],[100,1,"<a href=\"Providers\/AppServiceProvider.php.html#20\">App\\Providers\\AppServiceProvider::register<\/a>"],[100,1,"<a href=\"Providers\/AppServiceProvider.php.html#46\">App\\Providers\\AppServiceProvider::boot<\/a>"],[100,1,"<a href=\"Repositories\/ProjectRepository.php.html#17\">App\\Repositories\\ProjectRepository::index<\/a>"],[100,1,"<a href=\"Repositories\/ProjectRepository.php.html#22\">App\\Repositories\\ProjectRepository::ProjectsUser<\/a>"],[100,1,"<a href=\"Repositories\/ProjectRepository.php.html#27\">App\\Repositories\\ProjectRepository::show<\/a>"],[93.33333333333333,4,"<a href=\"Repositories\/ProjectRepository.php.html#34\">App\\Repositories\\ProjectRepository::store<\/a>"],[100,4,"<a href=\"Repositories\/ProjectRepository.php.html#75\">App\\Repositories\\ProjectRepository::update<\/a>"],[100,1,"<a href=\"Repositories\/ProjectRepository.php.html#119\">App\\Repositories\\ProjectRepository::delete<\/a>"],[100,1,"<a href=\"Repositories\/StatusRepository.php.html#12\">App\\Repositories\\StatusRepository::index<\/a>"],[100,1,"<a href=\"Repositories\/StatusRepository.php.html#17\">App\\Repositories\\StatusRepository::store<\/a>"],[100,1,"<a href=\"Repositories\/StatusRepository.php.html#27\">App\\Repositories\\StatusRepository::update<\/a>"],[100,1,"<a href=\"Repositories\/StatusRepository.php.html#34\">App\\Repositories\\StatusRepository::delete<\/a>"],[100,1,"<a href=\"Repositories\/TaskRepository.php.html#17\">App\\Repositories\\TaskRepository::index<\/a>"],[100,1,"<a href=\"Repositories\/TaskRepository.php.html#22\">App\\Repositories\\TaskRepository::show<\/a>"],[94.73684210526315,3,"<a href=\"Repositories\/TaskRepository.php.html#27\">App\\Repositories\\TaskRepository::store<\/a>"],[35.714285714285715,4,"<a href=\"Repositories\/TaskRepository.php.html#54\">App\\Repositories\\TaskRepository::ChangeStatus<\/a>"],[100,1,"<a href=\"Repositories\/TaskRepository.php.html#76\">App\\Repositories\\TaskRepository::delete<\/a>"],[100,3,"<a href=\"Repositories\/UserRepository.php.html#14\">App\\Repositories\\UserRepository::checkAdminCannotModify<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#22\">App\\Repositories\\UserRepository::index<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#27\">App\\Repositories\\UserRepository::UsersRole<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#32\">App\\Repositories\\UserRepository::ChangeRole<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#42\">App\\Repositories\\UserRepository::activate<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#51\">App\\Repositories\\UserRepository::ban<\/a>"],[100,1,"<a href=\"Repositories\/UserRepository.php.html#60\">App\\Repositories\\UserRepository::delete<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#14\">App\\Services\\ProjectService::__construct<\/a>"],[83.33333333333334,2,"<a href=\"Services\/ProjectService.php.html#18\">App\\Services\\ProjectService::authorized<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#29\">App\\Services\\ProjectService::index<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#35\">App\\Services\\ProjectService::ProjectsUser<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#40\">App\\Services\\ProjectService::show<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#45\">App\\Services\\ProjectService::store<\/a>"],[100,1,"<a href=\"Services\/ProjectService.php.html#52\">App\\Services\\ProjectService::update<\/a>"],[100,2,"<a href=\"Services\/ProjectService.php.html#59\">App\\Services\\ProjectService::delete<\/a>"],[100,1,"<a href=\"Services\/StatusService.php.html#12\">App\\Services\\StatusService::__construct<\/a>"],[100,1,"<a href=\"Services\/StatusService.php.html#16\">App\\Services\\StatusService::index<\/a>"],[100,1,"<a href=\"Services\/StatusService.php.html#21\">App\\Services\\StatusService::store<\/a>"],[100,1,"<a href=\"Services\/StatusService.php.html#26\">App\\Services\\StatusService::update<\/a>"],[100,2,"<a href=\"Services\/StatusService.php.html#31\">App\\Services\\StatusService::delete<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#10\">App\\Services\\TaskService::__construct<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#14\">App\\Services\\TaskService::index<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#19\">App\\Services\\TaskService::show<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#24\">App\\Services\\TaskService::store<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#29\">App\\Services\\TaskService::ChangeStatus<\/a>"],[100,1,"<a href=\"Services\/TaskService.php.html#34\">App\\Services\\TaskService::delete<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#15\">App\\Services\\UserService::__construct<\/a>"],[100,3,"<a href=\"Services\/UserService.php.html#19\">App\\Services\\UserService::authorized<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#29\">App\\Services\\UserService::index<\/a>"],[100,2,"<a href=\"Services\/UserService.php.html#35\">App\\Services\\UserService::UsersRole<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#46\">App\\Services\\UserService::ChangeRole<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#55\">App\\Services\\UserService::activate<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#65\">App\\Services\\UserService::ban<\/a>"],[100,1,"<a href=\"Services\/UserService.php.html#75\">App\\Services\\UserService::delete<\/a>"],[0,1,"<a href=\"Enums\/RolesEnum.php.html#13\">App\\Enums\\RolesEnum::values<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
