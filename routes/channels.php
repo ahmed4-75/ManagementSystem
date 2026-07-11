@@ -7,12 +7,12 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 });
 
     # for public channel
-// Broadcast::channel('end-task', function () {
+// Broadcast::channel('notification-task', function () {
     //     return true;
 // });
 
     # for private channel
-Broadcast::channel('end-task.{userId}', function ($user, $userId) {
+Broadcast::channel('notification-task.{userId}', function ($user, $userId) {
     return (int) $user->id === (int) $userId;
 });
 

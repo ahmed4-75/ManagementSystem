@@ -83,7 +83,8 @@ class VerifyPhoneController extends Controller
         $token = config('services.twilio.token');
         $from  = config('services.twilio.from');
 
-        $client = new Client($sid, $token);
+        // $client = new Client($sid, $token);
+        $client = app()->make(Client::class, ['username' => $sid,'password' => $token]);
 
         $otp = random_int(100000,999999);
         $user->update(['otp' => Hash::make($otp)]);

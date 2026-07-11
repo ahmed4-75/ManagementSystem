@@ -5,8 +5,12 @@ namespace App\Repositories;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use App\Models\Status;
+use Illuminate\Support\Facades\Log;
+use App\Notifications\NewProject;
 use App\Repositories\Contracts\ProjectInterface;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectRepository implements ProjectInterface
 {
@@ -29,32 +33,43 @@ class ProjectRepository implements ProjectInterface
 
     public function store(ProjectRequest $request)
     {
-        $project = Project::create([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
+        return DB::transaction(function () use ($request) {
+            $project = Project::create([
+                'title' => $request->title,
+                'description' => $request->description
+            ]);
 
-        $project->users()->attach($request->usersIds);
+            $project->users()->attach($request->usersIds);
 
-        $statuses = [];
-        foreach ($request->usersIds as $userId) {
-            $statuses[] = [
-                'name' => 'New',
-                'project_id' => $project->id,
-                'user_id' => $userId,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
-            $statuses[] = [
-                'name' => 'Completed',
-                'project_id' => $project->id,
-                'user_id' => $userId,
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
-        }
-        Status::insert($statuses);
-        return true;
+            $statuses = [];
+            foreach ($request->usersIds as $userId) {
+                $statuses[] = [
+                    'name' => 'New',
+                    'project_id' => $project->id,
+                    'user_id' => $userId,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+                $statuses[] = [
+                    'name' => 'Completed',
+                    'project_id' => $project->id,
+                    'user_id' => $userId,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+            Status::insert($statuses);
+
+            try {
+                foreach ($project->users as $user) {
+                    Notification::send($user, new NewProject($project->title));
+                }
+                Log::info('✅ All users have been notified about the new project.');
+            }catch (\Exception $e) {
+                Log::error('❌ Notifications failed: ' . $e->getMessage());
+            }
+            return true;
+        });
     }
 
     public function update(ProjectRequest $request, int $id)

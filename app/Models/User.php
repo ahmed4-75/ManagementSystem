@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -88,11 +87,8 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'user_id');
     }
 
-    /**
-     * Get the notifications for the blog user.
-    */
-    // public function notifications(): HasMany
-    // {
-    //     return $this->hasMany(Notification::class, 'user_id');
-    // }
+    public function getIsActiveAttribute(): bool
+    {
+        return !$this->trashed();
+    }
 }

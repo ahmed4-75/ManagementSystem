@@ -15,6 +15,7 @@ class TasksController extends Controller
     public function index(int $id)
     {
         $tasks = $this->taskService->index($id);
+        
         return response()->json([
             'status' => 'success',
             'message' => 'Tasks Project retrieved successfully',

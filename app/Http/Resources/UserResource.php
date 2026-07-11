@@ -22,13 +22,12 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
+            'active' => $this->is_active,
 
             'roles' => RoleResource::collection($this->whenLoaded('roles')),
             'projects' => ProjectResource::collection($this->whenLoaded('projects')),
             'statuses' => StatusResource::collection($this->whenLoaded('statuses')),
             'tasks' => TaskResource::collection($this->whenLoaded('tasks'))
-            // 'notifications' => NotificationResource::collection($this->whenLoaded('notifications'))
         ];
     }
 }

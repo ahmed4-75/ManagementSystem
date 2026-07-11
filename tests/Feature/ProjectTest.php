@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
@@ -14,6 +15,7 @@ class ProjectTest extends TestCase
 {
     use RefreshDatabase;
     protected User $user;
+    protected User $user2;
 
     protected function setUp(): void
     {
@@ -21,7 +23,13 @@ class ProjectTest extends TestCase
 
         $this->withoutVite();
 
+        Role::firstOrCreate(['name' => 'owner']);
+        Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'user']);
+
         $this->user = User::factory()->create();
+        $this->user->roles()->attach(Role::where('name', 'owner')->first());
+        $this->user2 = User::factory()->create();
         $this->actingAs($this->user);
     }
 
@@ -132,8 +140,8 @@ class ProjectTest extends TestCase
             'description' => 'Project Description',
         ]);
 
-        // Verify statuses created for each user
         $project = Project::where('title', 'New Project')->first();
+
         $this->assertDatabaseHas('statuses', [
             'project_id' => $project->id,
             'user_id' => $this->user->id,
@@ -142,6 +150,17 @@ class ProjectTest extends TestCase
         $this->assertDatabaseHas('statuses', [
             'project_id' => $project->id,
             'user_id' => $this->user->id,
+            'name' => 'Completed',
+        ]);
+
+        $this->assertDatabaseHas('statuses', [
+            'project_id' => $project->id,
+            'user_id' => $user2->id,
+            'name' => 'New',
+        ]);
+        $this->assertDatabaseHas('statuses', [
+            'project_id' => $project->id,
+            'user_id' => $user2->id,
             'name' => 'Completed',
         ]);
     }
@@ -491,14 +510,12 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        // أنشئ status أولاً
         $status = Status::create([
             'name' => 'New',
             'project_id' => $project->id,
             'user_id' => $this->user->id,
         ]);
 
-        // ثم أنشئ Task
         Task::create([
             'title' => 'Test Task',
             'description' => 'Test Description',

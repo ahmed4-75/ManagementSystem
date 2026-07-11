@@ -1,12 +1,12 @@
 <?php
 
-use App\Events\EndTask;
 use App\Http\Requests\Auth\LoginRequest;
-// use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+// use App\Models\Project;
+// use App\Events\EndTask;
+// use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    $userId = 2;
-    $targetUsers = User::findOrFail($userId);
-    $message = 'A Task has ended, ' . $targetUsers->name.' '. $targetUsers->id;
-    broadcast(new EndTask($message, $targetUsers->id));
-    Log::info('✅ Broadcasted to user: ' . $targetUsers->id);
+    // $userId = 2;
+    // $targetUsers = User::findOrFail($userId);
+    // $message = 'A New Task , ' . $targetUsers->name.' '. $targetUsers->id;
+    // try{
+    //     broadcast(new EndTask($message, $targetUsers->id));
+    //     Log::info('✅ Broadcasted to user: ' . $targetUsers->id);
+    // }catch(\Exception $e){
+    //     Log::error('❌ Broadcasting failed: ' . $e->getMessage());
+    // }
 
     // $projectId = 1;
     // $project = Project::with('users')->findOrFail($projectId);

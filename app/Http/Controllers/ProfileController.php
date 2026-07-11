@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\NotificationResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -39,10 +40,29 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $unreadNotifications = $user->unreadNotifications;
+        $data = NotificationResource::collection($unreadNotifications);
+        $unreadNotifications->markAsRead();
+
         return response()->json([
             'status' => 'Success',
             'message' => 'You are in Your Profile',
-            'data' => new UserResource(Auth::user()),
+            'data' => new UserResource($user),
+            'notifications' => $data,
+            'notifications_count' => $data->count()
+        ],200);
+    }
+
+    public function DeleteNewProjectNotification()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->notifications()->where('type', 'App\Notifications\NewProject')->whereNotNull('read_at')->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'All notifications have been marked as read is deleted'
         ],200);
     }
 
@@ -153,8 +173,7 @@ class ProfileController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'lang' => $request->lang
+            'phone' => $request->phone
         ]);
         if($request->hasFile('favicon')){
             if (Storage::disk('local')->exists('favicons/'.$user->favicon)) {
@@ -171,7 +190,7 @@ class ProfileController extends Controller
             'message' => 'Profile Updated Successfully'
         ],200);
     }
-    
+
 
     /**
      * @OA\Post(

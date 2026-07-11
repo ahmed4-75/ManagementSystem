@@ -17,12 +17,12 @@ class NotificationResource extends JsonResource
         return
         [
             'id' => $this->id,
-            'title' => $this->title,
-            'body' => $this->body,
+            'type' =>  class_basename($this->type),
+            'title' => $this->data['title'] ?? null,
+            'message' => $this->data['message'] ?? null,
+            'read_at' => $this->read_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
-
-            // 'user' => $this->whenLoaded('user', fn() => new UserResource($this->user))
         ];
     }
 }

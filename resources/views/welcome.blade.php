@@ -176,10 +176,10 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const currentUserId = @json(auth()->id());
-                console.log('🔌 Subscribing to public channel: end-task');
-                window.Echo.private('end-task.'+currentUserId)
-                // window.Echo.channel('end-task')
-                .listen('.end-task', e => {console.log('✅ Event received:', e.message);})
+                console.log('🔌 Subscribing to public channel: notification-task');
+                window.Echo.private('notification-task.'+currentUserId)
+                // window.Echo.channel('notification-task')
+                .listen('.notification-task', e => {console.log('✅ Event received:', e.message);})
                 .error(error => {console.error('❌ Channel error:', error);});
             });
         </script>

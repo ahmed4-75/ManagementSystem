@@ -31,13 +31,13 @@ class EndTask implements ShouldBroadcastNow
     public function broadcastOn(): array
     {
         return [
-        //    new Channel('end-task'),
-            new PrivateChannel('end-task.' . $this->userId),
+        //    new Channel('notification-task'),
+            new PrivateChannel('notification-task.' . $this->userId),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'end-task';
+        return 'notification-task';
     }
 }
