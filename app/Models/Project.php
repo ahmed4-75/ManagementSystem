@@ -38,6 +38,6 @@ class Project extends Model
     */
     public function tasks(): HasMany
     {
-        return $this->hasMany(Status::class, 'project_id');
+        return $this->hasMany(Task::class, 'project_id');
     }
 }

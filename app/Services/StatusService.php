@@ -6,6 +6,7 @@ use App\Http\Requests\StatusRequest;
 use App\Models\Status;
 use App\Repositories\Contracts\StatusInterface;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class StatusService
 {
@@ -30,7 +31,7 @@ class StatusService
 
     public function delete(int $id)
     {
-        $status = Status::findOrFail($id);
+        $status = Status::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
         if ($status->tasks()->exists()) {
             throw new HttpResponseException(
                 response()->json([

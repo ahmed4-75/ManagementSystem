@@ -59,7 +59,7 @@ class ProjectsController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Project updated successfully',
+            'message' => 'Project updated successfully, if you changed the users, the statuses have been created for each new user in the project and the tasks of removed users have been deleted.',
         ], 200);
     }
 

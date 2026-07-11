@@ -108,6 +108,9 @@ class StatusTest extends TestCase
     {
         $project = Project::factory()->create();
 
+        // ربط المشروع بالمستخدم
+        $project->users()->attach($this->user->id);
+
         $data = [
             'name' => 'In Progress',
         ];

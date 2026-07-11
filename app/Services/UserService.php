@@ -7,6 +7,8 @@ use App\Http\Requests\RolesRequest;
 use App\Repositories\Contracts\UserInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Exceptions\UnauthorizedException;
+use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 // use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -43,6 +45,12 @@ class UserService
         return $this->userRepository->UsersRole($roleName);
     }
 
+    public function UsersProject(int $id)
+    {
+        $this->authorized();
+        return $this->userRepository->UsersProject($id);
+    }
+
     public function ChangeRole(RolesRequest $request, int $id)
     {
         $this->authorized();
@@ -75,10 +83,19 @@ class UserService
     public function delete(int $id)
     {
         $this->authorized();
+        $user = User::withTrashed()->findOrFail($id);
+        if ($user->tasks()->exists() or $user->projects()->exists()) {
+            throw new HttpResponseException(
+                response()->json([
+                    'status' => 'error',
+                    'message' => 'Tasks are assigned to this User. You cannot delete him.'
+                ], 422)
+            );
+        }
         $role = Auth::user()->roles->first(function ($role) {
             return in_array($role->name, ['admin', 'owner']);
         });
 
-        return $this->userRepository->delete($id, $role->name);
+        return $this->userRepository->delete($user, $role->name);
     }
 }

@@ -170,7 +170,7 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->owner);
 
-        $response = $this->getJson('/api/users/backend');
+        $response = $this->getJson('/api/users/role/backend');
 
         $response->assertOk()
             ->assertJsonPath('status', 'success')
@@ -181,7 +181,7 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->admin);
 
-        $response = $this->getJson('/api/users/frontend');
+        $response = $this->getJson('/api/users/role/frontend');
 
         $response->assertOk()
             ->assertJsonPath('status', 'success');
@@ -191,7 +191,7 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->ui);
 
-        $response = $this->getJson('/api/users/admin');
+        $response = $this->getJson('/api/users/role/admin');
 
         $this->assertUnauthorizedResponse($response);
     }
@@ -200,7 +200,7 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->owner);
 
-        $response = $this->getJson('/api/users/invalid-role');
+        $response = $this->getJson('/api/users/role/invalid-role');
 
         $response->assertUnprocessable()
             ->assertJsonValidationErrors(['role']);
@@ -210,7 +210,7 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->owner);
 
-        $response = $this->getJson('/api/users/Admin');
+        $response = $this->getJson('/api/users/role/Admin');
 
         $response->assertUnprocessable()
             ->assertJsonValidationErrors(['role']);

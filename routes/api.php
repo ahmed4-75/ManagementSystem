@@ -23,9 +23,13 @@ Route::middleware('throttle:auth')->group(function () {
     Route::post('/forgot-password',[LoginNoPasswordController::class,'forgotPassword'],);
     Route::post('/reset-password',[LoginNoPasswordController::class,'resetPassword'],);
 });
-Route::get('/verify-email/sendMail/{id}',[VerifyEmailController::class,'send'])->name('VE-sendMail');
+
+Route::middleware('throttle:verify')->group(function () {
+    Route::get('/verify-email/sendMail/{id}',[VerifyEmailController::class,'send'])->name('VE-sendMail');
+    Route::get('/verify-phone/sendSMS/{id}',[VerifyPhoneController::class,'send'])->name('VP-sendSMS');
+});
+
 Route::post('/verify-email',[VerifyEmailController::class,'verify'])->name('verify-email');
-Route::get('/verify-phone/sendSMS/{id}',[VerifyPhoneController::class,'send'])->name('VP-sendSMS');
 Route::post('/verify-phone',[VerifyPhoneController::class,'verify'])->name('verify-phone');
 
 Route::middleware(['auth:sanctum'])->group(function(){
@@ -61,7 +65,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::middleware('throttle:users')->group(function () {
         Route::get('/users',[UsersController::class,'index']);
-        Route::get('/users/{roleName}',[UsersController::class,'UsersRole']);
+        Route::get('/users/role/{roleName}',[UsersController::class,'UsersRole']);
+        Route::get('/users/project/{id}',[UsersController::class,'UsersProject']);
         Route::post('/users/{id}',[UsersController::class,'ChangeRole']);
         Route::put('/users/activate/{id}',[UsersController::class,'activate']);
         Route::delete('/users/ban/{id}',[UsersController::class,'ban']);

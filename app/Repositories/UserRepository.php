@@ -7,7 +7,6 @@ use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Contracts\UserInterface;
 use App\Exceptions\UnauthorizedException;
-// use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRepository implements UserInterface
 {
@@ -27,6 +26,11 @@ class UserRepository implements UserInterface
     public function UsersRole(string $roleName)
     {
         return User::query()->whereHas('roles', function ($query) use ($roleName) { $query->where('name', $roleName); })->get();
+    }
+
+    public function UsersProject(int $id)
+    {
+        return User::query()->whereHas('projects', function ($query) use ($id) { $query->where('project_id', $id); })->get();
     }
 
     public function ChangeRole(RolesRequest $request, int $id, string $roleName)
@@ -57,9 +61,8 @@ class UserRepository implements UserInterface
         return true;
     }
 
-    public function delete(int $id, string $roleName)
+    public function delete(User $user, string $roleName)
     {
-        $user = User::withTrashed()->findOrFail($id);
         $this->checkAdminCannotModify($user, $roleName);
 
         $user->forceDelete();

@@ -33,7 +33,7 @@ class ProjectRepository implements ProjectInterface
 
     public function store(ProjectRequest $request)
     {
-        return DB::transaction(function () use ($request) {
+        $project = DB::transaction(function () use ($request) {
             $project = Project::create([
                 'title' => $request->title,
                 'description' => $request->description
@@ -60,60 +60,63 @@ class ProjectRepository implements ProjectInterface
             }
             Status::insert($statuses);
 
-            try {
-                foreach ($project->users as $user) {
-                    Notification::send($user, new NewProject($project->title));
-                }
-                Log::info('✅ All users have been notified about the new project.');
-            }catch (\Exception $e) {
-                Log::error('❌ Notifications failed: ' . $e->getMessage());
-            }
-            return true;
+            return $project;
         });
+        try {
+            foreach ($project->users as $user) {
+                Notification::send($user, new NewProject($project->title));
+            }
+            Log::info('✅ All users have been notified about the new project.');
+        }catch (\Exception $e) {
+            Log::error('❌ Notifications failed: ' . $e->getMessage());
+        }
+        return true;
     }
 
     public function update(ProjectRequest $request, int $id)
     {
-        $project = Project::findOrFail($id);
-        $project->update([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
+        return DB::transaction(function () use ($request, $id) {
+            $project = Project::findOrFail($id);
+            $project->update([
+                'title' => $request->title,
+                'description' => $request->description
+            ]);
 
-        $oldUserIds = $project->users()->pluck('users.id')->toArray();
-        $newUserIds = $request->usersIds;
+            $oldUserIds = $project->users()->pluck('users.id')->toArray();
+            $newUserIds = $request->usersIds;
 
-        $removedUserIds = array_diff($oldUserIds, $newUserIds);
-        $addedUserIds = array_diff($newUserIds, $oldUserIds);
+            $removedUserIds = array_diff($oldUserIds, $newUserIds);
+            $addedUserIds = array_diff($newUserIds, $oldUserIds);
 
-        if (!empty($removedUserIds)) {
-            $project->users()->detach($removedUserIds);
-            Status::where('project_id', $project->id)->whereIn('user_id', $removedUserIds)->delete();
-        }
-
-        if (!empty($addedUserIds)) {
-            $project->users()->attach($addedUserIds);
-
-            $statuses = [];
-            foreach ($addedUserIds as $userId) {
-                $statuses[] = [
-                    'name' => 'New',
-                    'project_id' => $project->id,
-                    'user_id' => $userId,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ];
-                $statuses[] = [
-                    'name' => 'Completed',
-                    'project_id' => $project->id,
-                    'user_id' => $userId,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ];
+            if (!empty($removedUserIds)) {
+                $project->users()->detach($removedUserIds);
+                Status::where('project_id', $project->id)->whereIn('user_id', $removedUserIds)->delete();
             }
-            Status::insert($statuses);
-        }
-        return true;
+
+            if (!empty($addedUserIds)) {
+                $project->users()->attach($addedUserIds);
+
+                $statuses = [];
+                foreach ($addedUserIds as $userId) {
+                    $statuses[] = [
+                        'name' => 'New',
+                        'project_id' => $project->id,
+                        'user_id' => $userId,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ];
+                    $statuses[] = [
+                        'name' => 'Completed',
+                        'project_id' => $project->id,
+                        'user_id' => $userId,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ];
+                }
+                Status::insert($statuses);
+            }
+            return true;
+        });
     }
 
     public function delete(Project $project)

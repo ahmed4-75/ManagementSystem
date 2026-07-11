@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\Role;
 use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
@@ -22,6 +23,8 @@ class TaskTest extends TestCase
         $this->withoutVite();
 
         $this->user = User::factory()->create();
+        $role = Role::factory()->create(['name' => 'owner']);
+        $this->user->roles()->attach($role);
         $this->actingAs($this->user);
     }
 

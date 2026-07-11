@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\Contracts\TaskInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class TaskRepository implements TaskInterface
 {
@@ -54,7 +55,8 @@ class TaskRepository implements TaskInterface
     public function ChangeStatus(int $taskId, int $statusId)
     {
         $task = Task::findOrFail($taskId);
-        $status = Status::findOrFail($statusId);
+        $status = Status::where('id', $statusId)->where('user_id', Auth::user()->id)->where('project_id', $task->project_id)->firstOrFail();
+
         if ($status->name === 'Completed') {
             $projectId = $status->project_id;
             $project = Project::with('users')->findOrFail($projectId);

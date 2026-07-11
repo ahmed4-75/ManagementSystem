@@ -35,6 +35,17 @@ class UsersController extends Controller
         ]);
     }
 
+    public function UsersProject(int $id)
+    {
+        $data = $this->userService->UsersProject($id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Users retrieved successfully',
+            'data' => UserResource::collection($data)
+        ]);
+    }
+
     public function ChangeRole(RolesRequest $request, int $id)
     {
         $this->userService->ChangeRole($request, $id);

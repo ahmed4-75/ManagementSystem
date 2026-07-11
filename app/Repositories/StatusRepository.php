@@ -16,6 +16,9 @@ class StatusRepository implements StatusInterface
 
     public function store(StatusRequest $request, int $id)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->projects()->where('projects.id', $id)->firstOrFail();
         Status::create([
             'name' => $request->name,
             'user_id' => Auth::user()->id,
@@ -27,6 +30,8 @@ class StatusRepository implements StatusInterface
     public function update(StatusRequest $request, int $id)
     {
         $status = Status::where('user_id', Auth::user()->id)->where('project_id', $id)->firstOrFail();
+        if($status->name == 'Completed' or $status->name == 'New'){throw new \Exception('This status cannot be updated');}
+
         $status->update(['name' => $request->name]);
         return true;
     }

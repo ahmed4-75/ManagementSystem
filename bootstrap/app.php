@@ -37,10 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
         RateLimiter::for('auth', function (Request $request) {
             return Limit::perMinute(5)->by($request->ip());
         });
-        // RateLimiter::for('verify', function (Request $request) {
-        //     $key = $request->ip() . ':' . ($request->email ?? $request->phone ?? 'unknown');
-        //     return Limit::perMinutes(2, 5)->by($key);  // 5 محاولات كل دقيقتين
-        // });
+        RateLimiter::for('verify', function (Request $request) {
+            $key = $request->ip() . ':' . ($request->email ?? $request->phone ?? 'unknown');
+            return Limit::perMinutes(2, 5)->by($key);  // 5 محاولات كل دقيقتين
+        });
         RateLimiter::for('profile', function (Request $request) {
             return Limit::perMinute(30)->by($request->user()?->id ?: $request->ip());
         });
