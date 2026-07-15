@@ -34,7 +34,7 @@ Route::post('/verify-phone',[VerifyPhoneController::class,'verify'])->name('veri
 
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::middleware('throttle:profile')->group(function () {
-        Route::get('/profile',[ProfileController::class,'index']);  //4|ejhZe7Z6MOZ7cixH2vImeipAeDxFDG089sDScpt4c6111c08
+        Route::get('/profile',[ProfileController::class,'index']);  //1|tcJKPpr6GO0PJ7Zw9tT9vuUJfrpfaD3mWb7pZYzha3507b75
         Route::post('/profile/update',[ProfileController::class,'update']);
         Route::put('/profile/update-password',[ProfileController::class,'updatePassword']);
         Route::post('/logout',[ProfileController::class,'logout']);

@@ -221,7 +221,7 @@ class ProfileTest extends TestCase
 
     public function test_user_can_update_profile_with_favicon()
     {
-        Storage::fake('local');
+        Storage::fake('b2');
 
         // Create a fake image file without GD extension
         $file = UploadedFile::fake()->create('avatar.jpg', 100, 'image/jpeg');
@@ -241,12 +241,12 @@ class ProfileTest extends TestCase
 
         $this->user->refresh();
 
-        $this->assertTrue(Storage::disk('local')->exists('favicons/' . $this->user->favicon));
+        $this->assertTrue(Storage::disk('b2')->exists('favicons/' . $this->user->favicon));
     }
 
     public function test_profile_update_rejects_invalid_favicon_type()
     {
-        Storage::fake('local');
+        Storage::fake('b2');
 
         $file = UploadedFile::fake()->create('document.txt', 100, 'text/plain');
 
@@ -263,7 +263,7 @@ class ProfileTest extends TestCase
 
     public function test_profile_update_rejects_oversized_favicon()
     {
-        Storage::fake('local');
+        Storage::fake('b2');
 
         // Create a fake image file larger than 6120KB (approx 7MB)
         $file = UploadedFile::fake()->create('large.jpg', 7000, 'image/jpeg');
@@ -281,11 +281,11 @@ class ProfileTest extends TestCase
 
     public function test_profile_update_deletes_old_favicon()
     {
-        Storage::fake('local');
+        Storage::fake('b2');
 
         // Set an existing favicon
         $this->user->update(['favicon' => 'old_favicon.jpg']);
-        Storage::disk('local')->put('favicons/old_favicon.jpg', 'old content');
+        Storage::disk('b2')->put('favicons/old_favicon.jpg', 'old content');
 
         $file = UploadedFile::fake()->create('new_avatar.png', 100, 'image/png');
 
@@ -298,7 +298,7 @@ class ProfileTest extends TestCase
 
         $response->assertStatus(200);
 
-        $this->assertFalse(Storage::disk('local')->exists('favicons/old_favicon.jpg'));
+        $this->assertFalse(Storage::disk('b2')->exists('favicons/old_favicon.jpg'));
     }
 
     // ==================== PUT /profile/update-password ====================
@@ -446,7 +446,7 @@ class ProfileTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'status' => 'Success',
-                'message' => 'All notifications have been marked as read is deleted',
+                'message' => 'All New Project notifications have been marked as read is deleted.',
             ]);
 
         $this->assertDatabaseCount('notifications', 0);
@@ -521,7 +521,7 @@ class ProfileTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'status' => 'Success',
-                'message' => 'All notifications have been marked as read is deleted',
+                'message' => 'All New Project notifications have been marked as read is deleted.',
             ]);
     }
 

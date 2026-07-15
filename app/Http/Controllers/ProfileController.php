@@ -62,7 +62,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'All notifications have been marked as read is deleted'
+            'message' => 'All New Project notifications have been marked as read is deleted.'
         ],200);
     }
 
@@ -176,13 +176,27 @@ class ProfileController extends Controller
             'phone' => $request->phone
         ]);
         if($request->hasFile('favicon')){
-            if (Storage::disk('local')->exists('favicons/'.$user->favicon)) {
-                Storage::disk('local')->delete('favicons/'.$user->favicon);
+            // if (Storage::disk('local')->exists('favicons/'.$user->favicon)) {
+            //     Storage::disk('local')->delete('favicons/'.$user->favicon);
+            // }
+            // $file = $request->file('favicon');
+            // $fileName = $user->id."_".Str::slug($user->name)."_favicon.".$file->getClientOriginalExtension();
+            // $file->storeAs("favicons",$fileName,"local");
+            // $user->update(['favicon' => $fileName]);
+            try {
+                if (Storage::disk('b2')->exists('favicons/'.$user->favicon)) {
+                    Storage::disk('b2')->delete('favicons/'.$user->favicon);
+                }
+                $file = $request->file('favicon');
+                $fileName = $user->id."_".Str::slug($user->name)."_favicon.".$file->getClientOriginalExtension();
+                $file->storeAs("favicons",$fileName,"b2");
+                $user->update(['favicon' => $fileName]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'Error',
+                    'message' => $e->getMessage()
+                ],422);
             }
-            $file = $request->file('favicon');
-            $fileName = $user->id."_".Str::slug($user->name)."_favicon.".$file->getClientOriginalExtension();
-            $file->storeAs("favicons",$fileName,"local");
-            $user->update(['favicon' => $fileName]);
         }
 
         return response()->json([

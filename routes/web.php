@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+// use App\Http\Requests\Auth\LoginRequest;
+// use App\Models\User;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Storage;
 // use App\Models\Project;
 // use App\Events\EndTask;
 // use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', function () {
     // $userId = 2;
@@ -40,15 +38,36 @@ Route::get('/', function () {
 });
 
 
-Route::view('/test','login');
-Route::post('/login',function(LoginRequest $request){
-    $user = User::where('email',$request->identification)->orWhere('phone',$request->identification)->first();
-    if($user and Hash::check($request->password,$user->password)){
-        if(!$user->email_verified_at){
-            return "You are not verified the email";
-        }
-        Auth::login($user,$request->filled('remember'));
-        return 'You are in';
-    }
-    return 'Invalid Credentials';
-})->name('login');
+// Route::view('/test-login','login');
+// Route::post('/login',function(LoginRequest $request){
+//     $user = User::where('email',$request->identification)->orWhere('phone',$request->identification)->first();
+//     if($user and Hash::check($request->password,$user->password)){
+//         if(!$user->email_verified_at){
+//             return "You are not verified the email";
+//         }
+//         Auth::login($user,$request->filled('remember'));
+//         return 'You are in';
+//     }
+//     return 'Invalid Credentials';
+// })->name('login');
+
+// Route::get('/test-b2', function () {
+//     try {
+//         Storage::disk('b2')->put('test-file.txt', 'Hello from Laravel!');
+
+//         $content = Storage::disk('b2')->get('test-file.txt');
+
+//         Storage::disk('b2')->delete('test-file.txt');
+
+//         return response()->json([
+//             'status' => '✅ Success!',
+//             'message' => 'Backblaze B2 is working perfectly!',
+//             'content' => $content,
+//         ]);
+//     } catch (\Exception $e) {
+//         return response()->json([
+//             'status' => '❌ Error!',
+//             'message' => $e->getMessage(),
+//         ], 500);
+//     }
+// });
