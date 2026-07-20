@@ -56,13 +56,17 @@ class LoginController extends Controller
                     properties: [
                         new OA\Property(property: 'status',type: 'string',example: 'Error'),
                         new OA\Property(property: 'message',type: 'string',example: 'Email is not verified.'),
-                        // new OA\Property(property: 'data',type: 'object',ref: '#/components/schemas/UserResource')
+                        new OA\Property(property: 'data',type: 'object',ref: '#/components/schemas/UserResource')
                     ]
                 )
             ),
             new OA\Response(
                 response: 422,
                 description: 'Validation error'
+            ),
+            new OA\Response(
+                response: 429,
+                description: "Too Many Requests - Throttled"
             )
         ]
     )]

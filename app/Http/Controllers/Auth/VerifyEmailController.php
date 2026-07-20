@@ -61,7 +61,11 @@ class VerifyEmailController extends Controller
                         new OA\Property(property: 'message',type: 'string',example: 'Failed to send verification email.'),
                     ]
                 )
-            )
+            ),
+            new OA\Response(
+                response: 429,
+                description: "Too Many Requests - Throttled"
+            ),
         ]
     )]
     public function send(int $id)

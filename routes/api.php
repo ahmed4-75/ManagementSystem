@@ -35,8 +35,8 @@ Route::post('/verify-phone',[VerifyPhoneController::class,'verify'])->name('veri
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::middleware('throttle:profile')->group(function () {
         Route::get('/profile',[ProfileController::class,'index']);  //1|tcJKPpr6GO0PJ7Zw9tT9vuUJfrpfaD3mWb7pZYzha3507b75
-        Route::post('/profile/update',[ProfileController::class,'update']);
         Route::put('/profile/update-password',[ProfileController::class,'updatePassword']);
+        Route::post('/profile/update',[ProfileController::class,'update']);
         Route::post('/logout',[ProfileController::class,'logout']);
         Route::delete('/delete-new-Project-notification',[ProfileController::class,'DeleteNewProjectNotification']);
     });
@@ -44,22 +44,22 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::middleware('throttle:projects')->group(function () {
         Route::get('/projects',[ProjectsController::class,'index']);
         Route::get('/projects/user',[ProjectsController::class,'ProjectsUser']);
-        Route::get('/projects/{id}',[ProjectsController::class,'show']);
-        Route::post('/projects',[ProjectsController::class,'store']);
-        Route::put('/projects/{id}',[ProjectsController::class,'update']);
-        Route::delete('/projects/{id}',[ProjectsController::class,'delete']);
+        Route::get('/projects/show/{id}',[ProjectsController::class,'show']);
+        Route::post('/projects/create',[ProjectsController::class,'store']);
+        Route::put('/projects/update/{id}',[ProjectsController::class,'update']);
+        Route::delete('/projects/delete/{id}',[ProjectsController::class,'delete']);
 
         Route::get('/statuses/{id}',[StatusesController::class,'index']);
-        Route::post('/statuses/{id}',[StatusesController::class,'store']);
-        Route::put('/statuses/{id}',[StatusesController::class,'update']);
-        Route::delete('/statuses/{id}',[StatusesController::class,'delete']);
+        Route::post('/statuses/create/{id}',[StatusesController::class,'store']);
+        Route::put('/statuses/update/{id}',[StatusesController::class,'update']);
+        Route::delete('/statuses/delete/{id}',[StatusesController::class,'delete']);
     });
 
     Route::middleware('throttle:tasks')->group(function () {
         Route::get('/tasks/project/{id}',[TasksController::class,'index']);
-        Route::get('/tasks/{id}',[TasksController::class,'show']);
-        Route::post('/tasks/{ProjectId}/{UserId}',[TasksController::class,'store']);
-        Route::put('/tasks/{TaskId}/{StatusId}',[TasksController::class,'ChangeStatus']);
+        Route::get('/tasks/show/{id}',[TasksController::class,'show']);
+        Route::post('/tasks/create/{ProjectId}/{UserId}',[TasksController::class,'store']);
+        Route::put('/tasks/change-status/{TaskId}/{StatusId}',[TasksController::class,'ChangeStatus']);
         Route::delete('/tasks/{id}',[TasksController::class,'delete']);
     });
 

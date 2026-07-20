@@ -2,6 +2,15 @@
 
 namespace App\Enums;
 
+use OpenApi\Attributes as OA;
+
+#[OA\Schema(
+    title: 'RolesEnum',
+    description: 'Available user roles in the system',
+    type: 'string',
+    enum: ['owner', 'admin', 'backend', 'frontend', 'ui'],
+    example: 'admin'
+)]
 enum RolesEnum : string
 {
     case OWNER = 'owner';

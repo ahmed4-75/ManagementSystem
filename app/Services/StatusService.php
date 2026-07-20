@@ -36,7 +36,7 @@ class StatusService
             throw new HttpResponseException(
                 response()->json([
                     'status' => 'error',
-                    'message' => 'Tasks are assigned to this status. You cannot delete it.'
+                    'message' => 'Tasks are assigned to this status, You cannot delete it.'
                 ], 422)
             );
         }

@@ -40,13 +40,17 @@ class RegisterController extends Controller
                     properties: [
                         new OA\Property(property: 'status',type: 'string',example: 'Success'),
                         new OA\Property(property: 'message',type: 'string',example: 'The User is Created Successfully, You have to verify the Email and Phone Number.'),
-                        // new OA\Property(property: 'data',type: 'object',ref: '#/components/schemas/UserResource')
+                        new OA\Property(property: 'data',type: 'object',ref: '#/components/schemas/UserResource')
                     ]
                 )
             ),
             new OA\Response(
                 response: 422,
                 description: 'Validation Error'
+            ),
+            new OA\Response(
+                response: 429,
+                description: "Too Many Requests - Throttled"
             )
         ]
     )]

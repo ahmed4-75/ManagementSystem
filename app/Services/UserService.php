@@ -10,7 +10,6 @@ use App\Exceptions\UnauthorizedException;
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
-// use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserService
 {

@@ -333,7 +333,7 @@ class StatusTest extends TestCase
         $response->assertStatus(422)
             ->assertJson([
                 'status' => 'error',
-                'message' => 'Tasks are assigned to this status. You cannot delete it.',
+                'message' => 'Tasks are assigned to this status, You cannot delete it.',
             ]);
     }
 

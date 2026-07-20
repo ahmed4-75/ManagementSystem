@@ -52,6 +52,10 @@ class VerifyPhoneController extends Controller
                 )
             ),
             new OA\Response(
+                response: 429,
+                description: "Too Many Requests - Throttled"
+            ),
+            new OA\Response(
                 response: 500,
                 description: "Failed to send SMS",
                 content: new OA\JsonContent(
