@@ -169,7 +169,7 @@ class TasksController extends Controller
     }
 
     #[OA\Delete(
-        path: '/api/tasks/{id}',
+        path: '/api/tasks/delete/{id}',
         summary: 'Delete a task',
         tags: ['Tasks'],
         security: [['sanctum' => []]],

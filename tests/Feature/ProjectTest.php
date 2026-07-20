@@ -91,7 +91,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->getJson("/api/projects/{$project->id}");
+        $response = $this->getJson("/api/projects/show/{$project->id}");
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -111,7 +111,7 @@ class ProjectTest extends TestCase
 
     public function test_show_returns_404_for_nonexistent_project(): void
     {
-        $response = $this->getJson('/api/projects/99999');
+        $response = $this->getJson('/api/projects/show/99999');
 
         $response->assertStatus(404);
     }
@@ -127,7 +127,7 @@ class ProjectTest extends TestCase
             'usersIds' => [$this->user->id, $user2->id],
         ];
 
-        $response = $this->postJson('/api/projects', $data);
+        $response = $this->postJson('/api/projects/create', $data);
 
         $response->assertStatus(201)
             ->assertJson([
@@ -170,7 +170,7 @@ class ProjectTest extends TestCase
     {
         $user2 = User::factory()->create();
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'description' => 'Description',
             'usersIds' => [$user2->id],
         ]);
@@ -183,7 +183,7 @@ class ProjectTest extends TestCase
     {
         $user2 = User::factory()->create();
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 12345,
             'description' => 'Description',
             'usersIds' => [$user2->id],
@@ -197,7 +197,7 @@ class ProjectTest extends TestCase
     {
         $user2 = User::factory()->create();
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => str_repeat('a', 256),
             'description' => 'Description',
             'usersIds' => [$user2->id],
@@ -211,7 +211,7 @@ class ProjectTest extends TestCase
     {
         $user2 = User::factory()->create();
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'usersIds' => [$user2->id],
         ]);
@@ -224,7 +224,7 @@ class ProjectTest extends TestCase
     {
         $user2 = User::factory()->create();
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'description' => 12345,
             'usersIds' => [$user2->id],
@@ -236,7 +236,7 @@ class ProjectTest extends TestCase
 
     public function test_store_requires_users_ids(): void
     {
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'description' => 'Description',
         ]);
@@ -247,7 +247,7 @@ class ProjectTest extends TestCase
 
     public function test_store_users_ids_must_be_array(): void
     {
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'description' => 'Description',
             'usersIds' => 'not-an-array',
@@ -261,7 +261,7 @@ class ProjectTest extends TestCase
     {
         $nonExistentUserId = 99999;
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'description' => 'Description',
             'usersIds' => [$nonExistentUserId],
@@ -273,7 +273,7 @@ class ProjectTest extends TestCase
 
     public function test_store_all_fields_missing(): void
     {
-        $response = $this->postJson('/api/projects', []);
+        $response = $this->postJson('/api/projects/create', []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['title', 'description', 'usersIds']);
@@ -284,7 +284,7 @@ class ProjectTest extends TestCase
         $existingUser = User::factory()->create();
         $nonExistentUserId = 99999;
 
-        $response = $this->postJson('/api/projects', [
+        $response = $this->postJson('/api/projects/create', [
             'title' => 'Title',
             'description' => 'Description',
             'usersIds' => [$existingUser->id, $nonExistentUserId],
@@ -308,7 +308,7 @@ class ProjectTest extends TestCase
             'usersIds' => [$newUser->id],
         ];
 
-        $response = $this->putJson("/api/projects/{$project->id}", $data);
+        $response = $this->putJson("/api/projects/update/{$project->id}", $data);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -343,7 +343,7 @@ class ProjectTest extends TestCase
             'usersIds' => [$newUser->id],
         ];
 
-        $response = $this->putJson("/api/projects/{$project->id}", $data);
+        $response = $this->putJson("/api/projects/update/{$project->id}", $data);
 
         $response->assertStatus(200);
 
@@ -369,7 +369,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'description' => 'Description',
             'usersIds' => [$this->user->id],
         ]);
@@ -382,7 +382,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 12345,
             'description' => 'Description',
             'usersIds' => [$this->user->id],
@@ -396,7 +396,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => str_repeat('a', 256),
             'description' => 'Description',
             'usersIds' => [$this->user->id],
@@ -410,7 +410,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 'Title',
             'usersIds' => [$this->user->id],
         ]);
@@ -423,7 +423,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 'Title',
             'description' => 12345,
             'usersIds' => [$this->user->id],
@@ -437,7 +437,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 'Title',
             'description' => 'Description',
         ]);
@@ -450,7 +450,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 'Title',
             'description' => 'Description',
             'usersIds' => 'not-an-array',
@@ -465,7 +465,7 @@ class ProjectTest extends TestCase
         $project = Project::factory()->create();
         $nonExistentUserId = 99999;
 
-        $response = $this->putJson("/api/projects/{$project->id}", [
+        $response = $this->putJson("/api/projects/update/{$project->id}", [
             'title' => 'Title',
             'description' => 'Description',
             'usersIds' => [$nonExistentUserId],
@@ -483,7 +483,7 @@ class ProjectTest extends TestCase
             'usersIds' => [$this->user->id],
         ];
 
-        $response = $this->putJson('/api/projects/99999', $data);
+        $response = $this->putJson('/api/projects/update/99999', $data);
 
         $response->assertStatus(404);
     }
@@ -493,7 +493,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->deleteJson("/api/projects/{$project->id}");
+        $response = $this->deleteJson("/api/projects/delete/{$project->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -524,7 +524,7 @@ class ProjectTest extends TestCase
             'status_id' => $status->id,
         ]);
 
-        $response = $this->deleteJson("/api/projects/{$project->id}");
+        $response = $this->deleteJson("/api/projects/delete/{$project->id}");
 
         $response->assertStatus(422)
             ->assertJson([
@@ -535,7 +535,7 @@ class ProjectTest extends TestCase
 
     public function test_delete_returns_404_for_nonexistent_project(): void
     {
-        $response = $this->deleteJson('/api/projects/99999');
+        $response = $this->deleteJson('/api/projects/delete/99999');
 
         $response->assertStatus(404);
     }

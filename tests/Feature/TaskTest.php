@@ -91,7 +91,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->getJson("/api/tasks/{$task->id}");
+        $response = $this->getJson("/api/tasks/show/{$task->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -109,7 +109,7 @@ class TaskTest extends TestCase
 
     public function test_show_returns_404_for_nonexistent_task(): void
     {
-        $response = $this->getJson('/api/tasks/99999');
+        $response = $this->getJson('/api/tasks/show/99999');
 
         $response->assertStatus(404);
     }
@@ -131,7 +131,7 @@ class TaskTest extends TestCase
             'description' => 'Task Description',
         ];
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", $data);
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", $data);
 
         $response->assertStatus(201)
             ->assertJson([
@@ -157,7 +157,7 @@ class TaskTest extends TestCase
             'description' => 'Task Description',
         ];
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$otherUser->id}", $data);
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$otherUser->id}", $data);
 
         $response->assertStatus(404);
     }
@@ -174,7 +174,7 @@ class TaskTest extends TestCase
             'description' => 'Task Description',
         ];
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", $data);
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", $data);
 
         $response->assertStatus(404);
     }
@@ -191,7 +191,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", [
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", [
             'description' => 'Description',
         ]);
 
@@ -210,7 +210,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", [
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", [
             'title' => 12345,
             'description' => 'Description',
         ]);
@@ -230,7 +230,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", [
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", [
             'title' => str_repeat('a', 256),
             'description' => 'Description',
         ]);
@@ -250,7 +250,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", [
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", [
             'title' => 'Title',
         ]);
 
@@ -269,7 +269,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->postJson("/api/tasks/{$project->id}/{$this->user->id}", [
+        $response = $this->postJson("/api/tasks/create/{$project->id}/{$this->user->id}", [
             'title' => 'Title',
             'description' => 12345,
         ]);
@@ -297,7 +297,7 @@ class TaskTest extends TestCase
             'status_id' => $status1->id,
         ]);
 
-        $response = $this->putJson("/api/tasks/{$task->id}/{$status2->id}");
+        $response = $this->putJson("/api/tasks/change-status/{$task->id}/{$status2->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -315,7 +315,7 @@ class TaskTest extends TestCase
     {
         $status = Status::factory()->create();
 
-        $response = $this->putJson("/api/tasks/99999/{$status->id}");
+        $response = $this->putJson("/api/tasks/change-status/99999/{$status->id}");
 
         $response->assertStatus(404);
     }
@@ -326,7 +326,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->putJson("/api/tasks/{$task->id}/99999");
+        $response = $this->putJson("/api/tasks/change-status/{$task->id}/99999");
 
         $response->assertStatus(404);
     }
@@ -338,7 +338,7 @@ class TaskTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->deleteJson("/api/tasks/{$task->id}");
+        $response = $this->deleteJson("/api/tasks/delete/{$task->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -353,7 +353,7 @@ class TaskTest extends TestCase
 
     public function test_delete_returns_404_for_nonexistent_task(): void
     {
-        $response = $this->deleteJson('/api/tasks/99999');
+        $response = $this->deleteJson('/api/tasks/delete/99999');
 
         $response->assertStatus(404);
     }

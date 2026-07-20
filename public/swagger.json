@@ -2301,13 +2301,13 @@
                 ]
             }
         },
-        "/api/tasks/{id}": {
+        "/api/tasks/delete/{id}": {
             "delete": {
                 "tags": [
                     "Tasks"
                 ],
                 "summary": "Delete a task",
-                "operationId": "25647b38472bf8c884b793a598b2c990",
+                "operationId": "643bf6efdd3f49ec3b0d73ea5bbd4edf",
                 "parameters": [
                     {
                         "name": "id",

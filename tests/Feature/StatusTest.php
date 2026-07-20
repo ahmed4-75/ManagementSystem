@@ -115,7 +115,7 @@ class StatusTest extends TestCase
             'name' => 'In Progress',
         ];
 
-        $response = $this->postJson("/api/statuses/{$project->id}", $data);
+        $response = $this->postJson("/api/statuses/create/{$project->id}", $data);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -135,7 +135,7 @@ class StatusTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->postJson("/api/statuses/{$project->id}", []);
+        $response = $this->postJson("/api/statuses/create/{$project->id}", []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
@@ -145,7 +145,7 @@ class StatusTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->postJson("/api/statuses/{$project->id}", [
+        $response = $this->postJson("/api/statuses/create/{$project->id}", [
             'name' => 12345,
         ]);
 
@@ -157,7 +157,7 @@ class StatusTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $response = $this->postJson("/api/statuses/{$project->id}", [
+        $response = $this->postJson("/api/statuses/create/{$project->id}", [
             'name' => str_repeat('a', 256),
         ]);
 
@@ -180,7 +180,7 @@ class StatusTest extends TestCase
             'name' => 'Updated Name',
         ];
 
-        $response = $this->putJson("/api/statuses/{$project->id}", $data);
+        $response = $this->putJson("/api/statuses/update/{$project->id}", $data);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -216,7 +216,7 @@ class StatusTest extends TestCase
             'user_id' => $otherUser->id,
         ]);
 
-        $response = $this->putJson("/api/statuses/{$project->id}", [
+        $response = $this->putJson("/api/statuses/update/{$project->id}", [
             'name' => 'Updated',
         ]);
 
@@ -243,7 +243,7 @@ class StatusTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->putJson("/api/statuses/{$project->id}", []);
+        $response = $this->putJson("/api/statuses/update/{$project->id}", []);
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name']);
@@ -258,7 +258,7 @@ class StatusTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->putJson("/api/statuses/{$project->id}", [
+        $response = $this->putJson("/api/statuses/update/{$project->id}", [
             'name' => 12345,
         ]);
 
@@ -275,7 +275,7 @@ class StatusTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->putJson("/api/statuses/{$project->id}", [
+        $response = $this->putJson("/api/statuses/update/{$project->id}", [
             'name' => str_repeat('a', 256),
         ]);
 
@@ -290,7 +290,7 @@ class StatusTest extends TestCase
             'user_id' => $this->user->id,
         ]);
 
-        $response = $this->deleteJson("/api/statuses/{$status->id}");
+        $response = $this->deleteJson("/api/statuses/delete/{$status->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -328,7 +328,7 @@ class StatusTest extends TestCase
             'project_id' => $project->id,
         ]);
 
-        $response = $this->deleteJson("/api/statuses/{$status->id}");
+        $response = $this->deleteJson("/api/statuses/delete/{$status->id}");
 
         $response->assertStatus(422)
             ->assertJson([
@@ -339,7 +339,7 @@ class StatusTest extends TestCase
 
     public function test_delete_returns_404_for_nonexistent_status(): void
     {
-        $response = $this->deleteJson('/api/statuses/99999');
+        $response = $this->deleteJson('/api/statuses/delete/99999');
 
         $response->assertStatus(404);
     }

@@ -60,7 +60,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
         Route::get('/tasks/show/{id}',[TasksController::class,'show']);
         Route::post('/tasks/create/{ProjectId}/{UserId}',[TasksController::class,'store']);
         Route::put('/tasks/change-status/{TaskId}/{StatusId}',[TasksController::class,'ChangeStatus']);
-        Route::delete('/tasks/{id}',[TasksController::class,'delete']);
+        Route::delete('/tasks/delete/{id}',[TasksController::class,'delete']);
     });
 
     Route::middleware('throttle:users')->group(function () {
