@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -37,7 +38,7 @@ class CreateOwner extends Command
         $name = $this->ask('What is the Owner Name');
         $email = $this->ask('What is the Owner Email');
         $phone = $this->ask('What is the Owner Phone');
-        $password = $this->ask('What is the Owner Password');
+        $password = $this->secret('What is the Owner Password');
 
         $validator = Validator::make([
             'name' => $name,
@@ -48,7 +49,7 @@ class CreateOwner extends Command
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|unique:users,email',
             'phone' => 'required|string|phone:AUTO|unique:users,phone',
-            'password' => 'required|string|min:6'
+            'password' => ['required','string',Password::min(6)->mixedCase()]
         ]);
 
         if($validator->fails()){

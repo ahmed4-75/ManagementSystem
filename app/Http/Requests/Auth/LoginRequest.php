@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class LoginRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'identification' => 'required|string|max:50',
-            'password' => 'required|string|min:6',
+            'password' => ['required','string',Password::min(6)->mixedCase()],
             'remember' => 'nullable|in:on,off'
         ];
     }

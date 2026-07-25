@@ -73,7 +73,7 @@ return [
             'checksum' => false,
             'options' => [
                 'http' => [
-                    'verify' => false,
+                    // 'verify' => false,
                     'headers' => ['x-amz-checksum-crc32' => null]
                 ],
             ],

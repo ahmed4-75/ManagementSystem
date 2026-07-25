@@ -75,8 +75,8 @@ class LoginNoPasswordController extends Controller
                 properties: [
                     new OA\Property(property: "token", type: "string", example: "f4e7b3c9a0b1d2e3..."),
                     new OA\Property(property: "email",type: "string",format: "email",description: "exists:users,email",maxLength: 50,example: "ahmed@example.com"),
-                    new OA\Property(property: "password",type: "string",minLength: 6,format: "password",example: "123456"),
-                    new OA\Property(property: "password_confirmation",type: "string",format: "password",example: "123456")
+                    new OA\Property(property: 'password',type: 'string',format: 'password',minLength: 6,description: 'Min 6 characters, must contain uppercase and lowercase letters.',example: 'Password123'),
+                    new OA\Property(property: 'password_confirmation',type: 'string',format: 'password',description: 'Must match the password field.',example: 'Password123')
                 ]
             )
         ),

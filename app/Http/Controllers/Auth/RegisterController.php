@@ -25,8 +25,8 @@ class RegisterController extends Controller
                     properties: [
                         new OA\Property(property: 'name',type: 'string',maxLength: 50,example: 'Ahmed Morgan'),
                         new OA\Property(property: 'email',type: 'string',format: 'email',description: 'email|unique:users,email',example: 'ahmed@example.com'),
-                        new OA\Property(property: 'password',type: 'string',format: 'password',minLength: 6,example: '123456'),
-                        new OA\Property(property: 'password_confirmation',type: 'string',format: 'password',example: '123456'),
+                        new OA\Property(property: 'password',type: 'string',format: 'password',minLength: 6,description: 'Min 6 characters, must contain uppercase and lowercase letters.',example: 'Password123'),
+                        new OA\Property(property: 'password_confirmation',type: 'string',format: 'password',description: 'Must match the password field.',example: 'Password123'),
                         new OA\Property(property: 'phone',type: 'string',description: 'phone|unique:users,phone',example: '+201234567890')
                     ]
                 )

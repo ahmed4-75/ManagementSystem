@@ -36,8 +36,8 @@ class AuthTest extends TestCase
             'name' => 'Test User',
             'email' => 'test@example.com',
             'phone' => '+201112223344',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
+            'password' => 'Password123',
+            'password_confirmation' => 'Password123',
         ]);
 
         $response->assertStatus(201)
@@ -59,8 +59,8 @@ class AuthTest extends TestCase
             'name' => 'Test User',
             'email' => $this->user->email,
             'phone' => '+201112223344',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
+            'password' => 'Password123',
+            'password_confirmation' => 'Password123',
         ])->assertStatus(422)
           ->assertJsonValidationErrors(['email']);
     }
@@ -72,8 +72,8 @@ class AuthTest extends TestCase
             'name' => 'Test User',
             'email' => 'unique@example.com',
             'phone' => '+201234567890',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
+            'password' => 'Password123',
+            'password_confirmation' => 'Password123',
         ])->assertStatus(422)
           ->assertJsonValidationErrors(['phone']);
     }
@@ -85,8 +85,8 @@ class AuthTest extends TestCase
             'name' => 'Test User',
             'email' => 'test@example.com',
             'phone' => 'invalid-phone',
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
+            'password' => 'Password123',
+            'password_confirmation' => 'Password123',
         ]);
 
         $response->assertStatus(422)
@@ -113,7 +113,7 @@ class AuthTest extends TestCase
             'name' => 'Test User',
             'email' => 'test@example.com',
             'phone' => '+201112223344',
-            'password' => 'password123',
+            'password' => 'Password123',
             'password_confirmation' => 'different123',
         ])->assertStatus(422)
           ->assertJsonValidationErrors(['password']);
@@ -134,14 +134,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'login@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => now(),
             'phone_verified_at' => now(),
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'login@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(200)
@@ -157,14 +157,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'phone' => '+201234567899',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => now(),
             'phone_verified_at' => now(),
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => '+201234567899',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(200)
@@ -176,7 +176,7 @@ class AuthTest extends TestCase
     {
         $this->postJson('/api/login', [
             'identification' => 'nonexistent@example.com',
-            'password' => 'wrongpassword',
+            'password' => 'wrongPassword',
         ])->assertStatus(401)
           ->assertJson([
               'status' => 'Error',
@@ -196,7 +196,7 @@ class AuthTest extends TestCase
 
         $this->postJson('/api/login', [
             'identification' => 'test@example.com',
-            'password' => 'wrongpassword',
+            'password' => 'wrongPassword',
         ])->assertStatus(401)
           ->assertJson([
               'status' => 'Error',
@@ -209,14 +209,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'unverified@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => null,
             'phone_verified_at' => now(),
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'unverified@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(403)
@@ -232,14 +232,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'unverified@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => now(),
             'phone_verified_at' => null,
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'unverified@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(403)
@@ -254,14 +254,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'remember@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => now(),
             'phone_verified_at' => now(),
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'remember@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
             'remember' => 'on',
         ]);
 
@@ -279,14 +279,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'short@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => now(),
             'phone_verified_at' => now(),
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'short@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(200);
@@ -395,8 +395,8 @@ class AuthTest extends TestCase
         $response = $this->postJson('/api/reset-password', [
             'token' => $token,
             'email' => 'reset@example.com',
-            'password' => 'newpassword123',
-            'password_confirmation' => 'newpassword123',
+            'password' => 'newPassword123',
+            'password_confirmation' => 'newPassword123',
         ]);
 
         $response->assertStatus(200)
@@ -406,7 +406,7 @@ class AuthTest extends TestCase
             ]);
 
         $user->refresh();
-        $this->assertTrue(Hash::check('newpassword123', $user->password));
+        $this->assertTrue(Hash::check('newPassword123', $user->password));
         $this->assertDatabaseMissing('password_reset_tokens', [
             'email' => 'reset@example.com',
         ]);
@@ -422,8 +422,8 @@ class AuthTest extends TestCase
         $this->postJson('/api/reset-password', [
             'token' => 'invalid-token',
             'email' => 'reset@example.com',
-            'password' => 'newpassword123',
-            'password_confirmation' => 'newpassword123',
+            'password' => 'newPassword123',
+            'password_confirmation' => 'newPassword123',
         ])->assertStatus(401)
           ->assertJson([
               'status' => 'Error',
@@ -448,8 +448,8 @@ class AuthTest extends TestCase
         $this->postJson('/api/reset-password', [
             'token' => $token,
             'email' => 'wrong@example.com',
-            'password' => 'newpassword123',
-            'password_confirmation' => 'newpassword123',
+            'password' => 'newPassword123',
+            'password_confirmation' => 'newPassword123',
         ])->assertStatus(422)
           ->assertJsonValidationErrors(['email']);
     }
@@ -468,7 +468,7 @@ class AuthTest extends TestCase
         $this->postJson('/api/reset-password', [
             'token' => 'some-token',
             'email' => 'test@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ])->assertStatus(422)
           ->assertJsonValidationErrors(['password']);
     }
@@ -859,14 +859,14 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'both@example.com',
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('Password123'),
             'email_verified_at' => null,
             'phone_verified_at' => null,
         ]);
 
         $response = $this->postJson('/api/login', [
             'identification' => 'both@example.com',
-            'password' => 'password123',
+            'password' => 'Password123',
         ]);
 
         $response->assertStatus(403)

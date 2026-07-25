@@ -22,7 +22,7 @@ class LoginController extends Controller
                 required: ['identification', 'password'],
                 properties: [
                     new OA\Property(property: 'identification',type: 'string',maxLength: 50,description: 'Email or phone number',example: 'ahmed@example.com'),
-                    new OA\Property(property: 'password',type: 'string',minLength: 6,example: '123456'),
+                    new OA\Property(property: 'password',type: 'string',format: 'password',minLength: 6,description: 'Min 6 characters, must contain uppercase and lowercase letters.',example: 'Password123'),
                     new OA\Property(property: 'remember',type: 'string',enum: ['on', 'off'],example: 'off')
                 ]
             )
