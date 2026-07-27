@@ -8,6 +8,7 @@ use Twilio\Rest\Client;
 use App\Http\Requests\Auth\VerifyPhoneRequest;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class VerifyPhoneController extends Controller
@@ -92,6 +93,7 @@ class VerifyPhoneController extends Controller
 
         $otp = random_int(100000,999999);
         $user->update(['otp' => Hash::make($otp)]);
+        Cache::put("otp_{$user->id}","valid",now()->addMinutes(5));
         try {
             $client->messages->create(
                 $user->phone,
@@ -102,6 +104,7 @@ class VerifyPhoneController extends Controller
             );
         } catch (\Exception $e) {
             $user->update(['otp' => null]);
+            Cache::forget("otp_{$user->id}");
             return response()->json(
                 [
                     'status' => 'Error',
@@ -148,7 +151,7 @@ class VerifyPhoneController extends Controller
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: "status", type: "string", example: "Error"),
-                        new OA\Property(property: "message", type: "string", example: "Invalid OTP")
+                        new OA\Property(property: "message", type: "string", example: "Invalid OTP or Expired")
                     ]
                 )
             ),
@@ -180,7 +183,7 @@ class VerifyPhoneController extends Controller
     )]
     public function verify(VerifyPhoneRequest $request)
     {
-        $key = 'verify-email:' . $request->ip() . ':' . $request->phone;
+        $key = 'verify-phone:' . $request->ip() . ':' . $request->phone;
 
         if (RateLimiter::tooManyAttempts($key, maxAttempts: 5)) {
             $seconds = RateLimiter::availableIn($key);
@@ -200,16 +203,17 @@ class VerifyPhoneController extends Controller
             ],404);
         }
 
-        if(!Hash::check(implode('',$request->otp),$user->otp)){
+        if(!Cache::has("otp_{$user->id}") or !Hash::check(implode('',$request->otp),$user->otp)){
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Invalid OTP'
+                'message' => 'Invalid OTP or Expired'
             ],400);
         }
         $user->update([
             'phone_verified_at' => now(),
             'otp' => null
         ]);
+        Cache::forget("otp_{$user->id}");
         RateLimiter::clear($key);
 
         return response()->json(

@@ -96,8 +96,8 @@ class ProfileController extends Controller
                 required: ["current_password", "new_password", "new_password_confirmation"],
                 properties: [
                     new OA\Property(property: "current_password",type: "string",minLength: 6,format: "password",example: "123456"),
-                    new OA\Property(property: "new_password",type: "string",minLength: 6,format: "password",example: "123456"),
-                    new OA\Property(property: "new_password_confirmation",type: "string",format: "password",example: "123456")
+                    new OA\Property(property: 'new_password',type: 'string',format: 'password',minLength: 6,description: 'Min 6 characters, must contain uppercase and lowercase letters.',example: 'Password123'),
+                    new OA\Property(property: 'new_password_confirmation',type: 'string',format: 'password',description: 'Must match the password field.',example: 'Password123')
                 ]
             )
         ),

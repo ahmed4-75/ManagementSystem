@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Http\Requests\Auth\VerifyEmailRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class VerifyEmailController extends Controller
@@ -86,10 +87,12 @@ class VerifyEmailController extends Controller
 
         $otp = random_int(100000,999999);
         $user->update(['otp' => Hash::make($otp)]);
+        Cache::put("otp_{$user->id}","valid",now()->addMinutes(5));
         try {
             Mail::to($user->email)->send(new VerifyEmailMail($user->email, $otp));
         } catch (\Exception $e) {
             $user->update(['otp' => null]);
+            Cache::forget("otp_{$user->id}");
             return response()->json(
                 [
                     'status' => 'Error',
@@ -135,7 +138,7 @@ class VerifyEmailController extends Controller
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status',type: 'string',example: 'Error'),
-                        new OA\Property(property: 'message',type: 'string',example: 'Invalid OTP')
+                        new OA\Property(property: 'message',type: 'string',example: 'Invalid OTP or Expired'),
                     ]
                 )
             ),
@@ -187,16 +190,17 @@ class VerifyEmailController extends Controller
             ],404);
         }
 
-        if(!Hash::check(implode('',$request->otp),$user->otp)){
+        if(!Cache::has("otp_{$user->id}") or !Hash::check(implode('',$request->otp),$user->otp)){
             return response()->json([
                 'status' => 'Error',
-                'message' => 'Invalid OTP'
+                'message' => 'Invalid OTP or Expired'
             ],400);
         }
         $user->update([
             'email_verified_at' => now(),
             'otp' => null
         ]);
+        Cache::forget("otp_{$user->id}");
         RateLimiter::clear($key);
 
         return response()->json(

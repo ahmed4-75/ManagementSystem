@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -558,6 +559,7 @@ class AuthTest extends TestCase
             'email_verified_at' => null,
             'otp' => Hash::make($otp),
         ]);
+        Cache::put("otp_{$user->id}", "valid", now()->addMinutes(5));
 
         $response = $this->postJson('/api/verify-email', [
             'email' => 'verify@example.com',
@@ -592,7 +594,7 @@ class AuthTest extends TestCase
         $response->assertStatus(400)
             ->assertJson([
                 'status' => 'Error',
-                'message' => 'Invalid OTP',
+                'message' => 'Invalid OTP or Expired',
             ]);
     }
 
@@ -653,6 +655,7 @@ class AuthTest extends TestCase
             'email_verified_at' => null,
             'otp' => Hash::make('123456'),
         ]);
+        Cache::put("otp_{$user->id}", "valid", now()->addMinutes(5));
 
         $this->postJson('/api/verify-email', [
             'email' => 'clear@example.com',
@@ -665,6 +668,7 @@ class AuthTest extends TestCase
             'email_verified_at' => null,
             'otp' => Hash::make('654321'),
         ]);
+        Cache::put("otp_{$user2->id}", "valid", now()->addMinutes(5));
 
         $this->postJson('/api/verify-email', [
             'email' => 'clear2@example.com',
@@ -759,6 +763,7 @@ class AuthTest extends TestCase
             'phone_verified_at' => null,
             'otp' => Hash::make($otp),
         ]);
+        Cache::put("otp_{$user->id}", "valid", now()->addMinutes(5));
 
         $response = $this->postJson('/api/verify-phone', [
             'phone' => '+201234567777',
@@ -793,7 +798,7 @@ class AuthTest extends TestCase
         $response->assertStatus(400)
             ->assertJson([
                 'status' => 'Error',
-                'message' => 'Invalid OTP',
+                'message' => 'Invalid OTP or Expired',
             ]);
     }
 
@@ -845,10 +850,24 @@ class AuthTest extends TestCase
             'phone_verified_at' => null,
             'otp' => Hash::make('123456'),
         ]);
+        Cache::put("otp_{$user->id}", "valid", now()->addMinutes(5));
 
         $this->postJson('/api/verify-phone', [
             'phone' => '+201234565555',
             'otp' => ['1', '2', '3', '4', '5', '6'],
+        ])->assertStatus(200);
+
+            // Rate limit should be cleared, so another request should work
+        $user2 = User::factory()->create([
+            'phone' => '+201234555555',
+            'phone_verified_at' => null,
+            'otp' => Hash::make('654321'),
+        ]);
+        Cache::put("otp_{$user2->id}", "valid", now()->addMinutes(5));
+
+        $this->postJson('/api/verify-phone', [
+            'phone' => '+201234555555',
+            'otp' => ['6', '5', '4', '3', '2', '1'],
         ])->assertStatus(200);
     }
 

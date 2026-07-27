@@ -305,10 +305,11 @@ class ProfileTest extends TestCase
 
     public function test_user_can_update_password_with_correct_current_password()
     {
+        // $this->user->update(['password' => Hash::make('oldPassword')]);
         $response = $this->putJson('/api/profile/update-password', [
-            'current_password' => 'password',
-            'new_password' => 'newpassword123',
-            'new_password_confirmation' => 'newpassword123',
+            'current_password' => 'Password',
+            'new_password' => 'newPassword123',
+            'new_password_confirmation' => 'newPassword123',
         ]);
 
         $response->assertStatus(200)
@@ -318,15 +319,15 @@ class ProfileTest extends TestCase
             ]);
 
         $this->user->refresh();
-        $this->assertTrue(Hash::check('newpassword123', $this->user->password));
+        $this->assertTrue(Hash::check('newPassword123', $this->user->password));
     }
 
     public function test_password_update_fails_with_incorrect_current_password()
     {
         $response = $this->putJson('/api/profile/update-password', [
-            'current_password' => 'wrongpassword',
-            'new_password' => 'newpassword123',
-            'new_password_confirmation' => 'newpassword123',
+            'current_password' => 'wrongPassword',
+            'new_password' => 'newPassword123',
+            'new_password_confirmation' => 'newPassword123',
         ]);
 
         $response->assertStatus(422)
@@ -340,8 +341,8 @@ class ProfileTest extends TestCase
     {
         $response = $this->putJson('/api/profile/update-password', [
             'current_password' => '',
-            'new_password' => 'newpassword123',
-            'new_password_confirmation' => 'newpassword123',
+            'new_password' => 'newPassword123',
+            'new_password_confirmation' => 'newPassword123',
         ]);
 
         $response->assertStatus(422)
@@ -364,8 +365,8 @@ class ProfileTest extends TestCase
     {
         $response = $this->putJson('/api/profile/update-password', [
             'current_password' => 'password',
-            'new_password' => 'newpassword123',
-            'new_password_confirmation' => 'differentpassword',
+            'new_password' => 'newPassword123',
+            'new_password_confirmation' => 'differentPassword',
         ]);
 
         $response->assertStatus(422)
@@ -552,10 +553,11 @@ class ProfileTest extends TestCase
 
     public function test_password_update_with_same_password()
     {
+        // $this->user->update(['password' => Hash::make('aPassword')]);
         $response = $this->putJson('/api/profile/update-password', [
-            'current_password' => 'password',
-            'new_password' => 'password',
-            'new_password_confirmation' => 'password',
+            'current_password' => 'Password',
+            'new_password' => 'aPassword',
+            'new_password_confirmation' => 'aPassword',
         ]);
 
         // This should technically work since there's no rule preventing same password
