@@ -772,6 +772,6 @@ class UserTest extends TestCase
         $this->assertNotNull($user->email_verified_at);
         $this->assertNotNull($user->phone_verified_at);
         $this->assertEquals('user_favicon.jpg', $user->favicon);
-        $this->assertTrue(Hash::check('password', $user->password));
+        $this->assertTrue(Hash::check('Password', $user->password));
     }
 }
