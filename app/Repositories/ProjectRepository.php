@@ -30,7 +30,7 @@ class ProjectRepository implements ProjectInterface
             'users' => function ($query) {$query->with(['roles', 'tasks']);}, 'tasks'
         ])->findOrFail($id);
         $user = Auth::user();
-        if (!$project->users->contains($user->id)) {
+        if (!$project->users->contains($user->id) or !$user->roles->contains('name', 'admin') or !$user->roles->contains('name', 'owner')) {
             $project->setRelation('users', collect());
             $project->setRelation('tasks', collect());
         }
