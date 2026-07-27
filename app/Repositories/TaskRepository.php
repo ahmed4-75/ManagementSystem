@@ -22,7 +22,7 @@ class TaskRepository implements TaskInterface
 
     public function show(int $id)
     {
-        return Task::with(['project','user'])->findOrFail($id);
+        return Task::query()->where('user_id', Auth::id())->with(['project','user'])->findOrFail($id);
     }
 
     public function store(TaskRequest $request, int $projectId, int $userId)

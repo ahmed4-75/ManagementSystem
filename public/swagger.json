@@ -36,8 +36,10 @@
                                         "maxLength": 50
                                     },
                                     "password": {
+                                        "description": "Min 6 characters, must contain uppercase and lowercase letters.",
                                         "type": "string",
-                                        "example": "123456",
+                                        "format": "password",
+                                        "example": "Password123",
                                         "minLength": 6
                                     },
                                     "remember": {
@@ -220,15 +222,17 @@
                                         "maxLength": 50
                                     },
                                     "password": {
+                                        "description": "Min 6 characters, must contain uppercase and lowercase letters.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456",
+                                        "example": "Password123",
                                         "minLength": 6
                                     },
                                     "password_confirmation": {
+                                        "description": "Must match the password field.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456"
+                                        "example": "Password123"
                                     }
                                 },
                                 "type": "object"
@@ -316,15 +320,17 @@
                                         "example": "ahmed@example.com"
                                     },
                                     "password": {
+                                        "description": "Min 6 characters, must contain uppercase and lowercase letters.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456",
+                                        "example": "Password123",
                                         "minLength": 6
                                     },
                                     "password_confirmation": {
+                                        "description": "Must match the password field.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456"
+                                        "example": "Password123"
                                     },
                                     "phone": {
                                         "description": "phone|unique:users,phone",
@@ -556,7 +562,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Invalid OTP"
+                                            "example": "Invalid OTP or Expired"
                                         }
                                     },
                                     "type": "object"
@@ -795,7 +801,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "Invalid OTP"
+                                            "example": "Invalid OTP or Expired"
                                         }
                                     },
                                     "type": "object"
@@ -961,15 +967,17 @@
                                         "minLength": 6
                                     },
                                     "new_password": {
+                                        "description": "Min 6 characters, must contain uppercase and lowercase letters.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456",
+                                        "example": "Password123",
                                         "minLength": 6
                                     },
                                     "new_password_confirmation": {
+                                        "description": "Must match the password field.",
                                         "type": "string",
                                         "format": "password",
-                                        "example": "123456"
+                                        "example": "Password123"
                                     }
                                 },
                                 "type": "object"

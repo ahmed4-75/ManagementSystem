@@ -26,9 +26,15 @@ class ProjectRepository implements ProjectInterface
 
     public function show(int $id)
     {
-        return Project::with([
+        $project = Project::with([
             'users' => function ($query) {$query->with(['roles', 'tasks']);}, 'tasks'
         ])->findOrFail($id);
+        $user = Auth::user();
+        if (!$project->users->contains($user->id)) {
+            $project->setRelation('users', collect());
+            $project->setRelation('tasks', collect());
+        }
+        return $project;
     }
 
     public function store(ProjectRequest $request)
