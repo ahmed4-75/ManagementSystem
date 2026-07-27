@@ -71,6 +71,7 @@ class TasksController extends Controller
                 )
             ),
             new OA\Response(response: 401, description: 'Unauthenticated'),
+            new OA\Response(response: 403, description: 'Forbidden - You do not have permission to access this task'),
             new OA\Response(response: 404, description: 'Task not found'),
             new OA\Response(response: 429, description: 'Too Many Requests - Throttled')
         ]
